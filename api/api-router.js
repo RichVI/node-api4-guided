@@ -15,7 +15,11 @@ router.get('/', (req, res) => {
 router.get('/shouts', (req, res, next) => {
   Shouts.find()
     .then(shouts => {
-      res.status(200).json(shouts);
+      res.status(200).json({
+        motd: process.env.MOTD,
+        greeting: process.env.GREETING, 
+        shouts
+      });
     })
     .catch(error => next(error));
 });
